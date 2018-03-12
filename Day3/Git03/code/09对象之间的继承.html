@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+		/*var obj = {
+			name:"jack",
+			age:18,
+			gender:"男",
+			sayHi:function(){
+				console.log("呵呵，我是人");
+			}
+		};
+
+		//希望让obj2具有obj中的所有属性
+		//var obj2 = {};
+
+		function Fun(){}
+
+		Fun.prototype = obj;
+
+		var obj2 = new Fun();
+
+		console.log(obj2);
+		console.log(obj2.age);
+		obj2.sayHi();
+*/
+
+
+
+	//对象的拷贝（需要掌握）
+		var obj = {
+			name:"jack",
+			age:18,
+			gender:"男",
+			sayHi:function(){
+				console.log("呵呵，我是人");
+			}
+		};
+
+		var obj2 = {};
+		for(var k in obj){
+			obj2[k] = obj[k];
+		}
+
+		console.log(obj2);
+
+
+
+	</script>
+</body>
+</html>

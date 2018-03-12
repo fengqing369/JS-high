@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+		//使用前面两种继承方式时发现各有优缺点，所以将两种方式结合即可
+		//这种结合使用的方式称为组合继承,组合继承是最常用的一种继承方式。
+
+		function Animal(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Animal.prototype.eat = function(){
+			console.log("吃各种吃的");
+		};
+
+		
+		function Cat(name,age,color){
+			//使用借用构造函数的方式继承：
+			Animal.call(this,name,age);
+			this.color = color;
+		}
+
+		//原型继承的核心代码：
+		//使用组合继承方式后，在构造函数体中就设置了实例属性，此处不需要传参
+		Cat.prototype = new Animal();
+
+		//设置被覆盖的constructor属性
+		Cat.prototype.constructor = Cat;
+		Cat.prototype.shangShu = function(){
+			console.log("猫咪可以爬树");
+		};
+		
+		var c1 = new Cat("rose",20,"red");
+		console.log(c1);
+
+		//console.log(c1.toString());
+
+		//具体内容见图例 《 object.prototype.png 》。
+
+		//通过浏览器控制台查看时发现Object.prototype没有__proto__属性，但是访问时发现结果为null
+		//实际上是js主动设置的
+		console.log(Object.prototype.__proto__);//null
+
+
+		
+
+	</script>
+
+
+</body>
+</html>

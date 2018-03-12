@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;padding: 0;
+		}
+		#map{
+			width: 800px;
+			height: 600px;
+			background-color: #ccc;
+			position: relative;
+		}
+
+		#map div{
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="map"></div>
+
+
+	<script src="js/food.js"></script>
+	<script src="js/snake.js"></script>
+	<script src="js/game.js"></script>
+	<script>
+
+		//创建了一个游戏对象
+		var currentMap = document.getElementById("map");
+
+		//创建一个游戏对象：并且传入对应参数
+		var game = new Game({
+			food : new Food({map:currentMap}),
+			snake : new Snake({map:currentMap}),
+			map : currentMap
+		});
+		//开始游戏(初始化)
+		game.init();
+
+
+
+
+		//自调用函数的最后是一定要加分号的，否则遇到下一个自调用函数后会出现报错
+		//(intermediate value)(...) is not a function
+		(function(){
+
+		})();
+
+		(function(){
+
+		})();
+
+
+
+
+
+	</script>
+
+</body>
+</html>

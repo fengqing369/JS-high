@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+		// 对组合继承的优化方式：
+
+		/*function Animal(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Animal.prototype.eat = function(){
+			console.log("吃各种吃的");
+		};
+
+	
+		function Cat(name,age,color){
+			//使用借用构造函数的方式继承：
+			Animal.call(this,name,age);
+			this.color = color;
+		}
+
+		//原型继承方式中希望获取到Animal的原型方法
+		//Cat.prototype = new Animal();
+
+
+		//可以省去不需要继承的实例属性
+		//这种方式的确会比组合继承的方式性能更好，但是略麻烦(了解即可)
+		function Fun (){}
+		Fun.prototype = Animal.prototype;
+		Cat.prototype = new Fun();
+
+		Cat.prototype.constructor = Cat;
+		Cat.prototype.shangShu = function(){
+			console.log("猫咪可以爬树");
+		};
+		
+		var c1 = new Cat("rose",20,"red");
+		console.log(c1);
+*/
+
+		
+		//--------------拷贝继承方式---------------
+
+
+		function Animal(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Animal.prototype.eat = function(){
+			console.log("吃各种吃的");
+		};
+
+	
+		function Cat(name,age,color){
+			//使用借用构造函数的方式继承：
+			Animal.call(this,name,age);
+			this.color = color;
+		}
+
+		//拷贝继承:
+		//好处，使用继承的原型中的方法时，查找的次数会降低
+		for(var k in Animal.prototype){
+			Cat.prototype[k] = Animal.prototype[k];
+		}
+
+		Cat.prototype.constructor = Cat;
+		Cat.prototype.shangShu = function(){
+			console.log("猫咪可以爬树");
+		};
+
+		var c1 = new Cat("rose",20,"red");
+		console.log(c1);
+
+	</script>
+
+
+</body>
+</html>

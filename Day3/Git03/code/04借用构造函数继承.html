@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+		//1 面向对象的三个特征
+		//  - 封装
+		//  - 继承
+		//  - 多态
+
+		//2 继承的作用：
+		//  为了更好的数据共享
+
+		//3 继承的含义：
+		//  多个构造函数之间的关系
+
+		//4 实现方式：
+
+		//4.1 借用构造函数继承：
+
+		// - 设置需要被继承的构造函数Animal
+		function Animal(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Animal.prototype.eat = function(){
+			console.log("吃各种吃的");
+		};
+
+		// - 再设置一个猫咪构造函数
+
+		//思考：已经存在的构造函数Animal中具有了一些属性和方法，这些属性与方法时Cat构造函数需要的
+		//      没有必要再书写一遍了，可以使用继承的方式获取
+		function Cat(name,age){
+			//通过call的方式，修改Animal中的this指向为当前Cat的this，并设置参数
+			Animal.call(this,name,age);
+		}
+
+		var c1 = new Cat("jack",18);
+		console.log(c1);
+
+		//上面这种继承方式称为借用构造函数继承。
+		//效果：可以继承实例属性。但是原型中的方法无法继承
+
+/*	//call方法的基本使用：
+		function fun(num,str){
+			console.log(num,str);
+			console.log(this);
+		}
+
+		//函数可以通过函数名()的方式调用，也可以通过函数的call方法调用
+		fun(100,"jack");
+
+		//call方法的参数1表示函数内的this指向
+		//call方法的后面的其他参数表示真正的实参
+		fun.call({name:100},100,"jack");*/
+
+	</script>
+
+
+</body>
+</html>

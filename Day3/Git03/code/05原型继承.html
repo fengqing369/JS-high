@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+
+		function Animal(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Animal.prototype.eat = function(){
+			console.log("吃各种吃的");
+		};
+
+		
+		function Cat(color){
+			this.color = color;
+		}
+
+		//继承的核心代码：
+		Cat.prototype = new Animal("jack",18);
+
+		//设置被覆盖的constructor属性
+		Cat.prototype.constructor = Cat;
+		Cat.prototype.shangShu = function(){
+			console.log("猫咪可以爬树");
+		};
+		
+		var c1 = new Cat("red");
+		console.log(c1);
+		console.log(c1.name);
+		console.log(c1.age);
+		console.log(c1.color);
+		c1.shangShu();
+		c1.eat();
+
+		//使用原型继承的方式：
+		//1 好处：可以继承原型中的方法
+		//2 缺点：实例属性虽然有，但是无法传参(跟没有一样)
+
+
+
+
+
+		//中间的分析环节见图示 《 简易原型链.png 》
+
+		//概念总结：
+		//当我们使用一个对象的属性时，优先查找自身，如果有，使用，否则，查找__proto__。
+
+		//这种查找方式称为原型链.
+
+		//原型链是用来描述实例对象与原型对象之间关系的一种方式。
+
+
+	</script>
+
+
+</body>
+</html>

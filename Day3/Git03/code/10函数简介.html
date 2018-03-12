@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+
+	<script>
+		//1 函数的作用：
+		//  重用
+
+		//2 函数的执行方式
+		//  函数名()
+
+		//3 函数的创建方式
+
+		//function fun(){}
+
+		// var fun = function(){};
+
+
+		
+		//由于预解析的执行方式在每个浏览器中的实现是不同的，在使用函数声明语句时会出现不可预料的问题
+		/*if(true){
+			function fun(){
+				console.log("我是if中的fun");
+			}
+		}else{
+			function fun(){
+				console.log("我是else中的fun");
+			}
+		}
+		fun();*/
+
+
+		//下面的代码在所有浏览器中执行都是正确的
+		/*var fun;
+		if(true){
+			fun = function (){
+				console.log("我是if中的fun");
+			};
+		}else{
+			fun = function (){
+				console.log("我是else中的fun");
+			};
+		}
+		fun();*/
+
+		//结论：推荐使用函数表达式。
+
+
+		//第三种函数的创建方式(不常用)
+		//1 函数也是对象
+		//2 通过查看函数的结构，发现具有__proto__属性，指向构造函数的原型对象
+		//3 这个原型中具有constructor属性，指向构造函数Function
+		//结论：函数都是通过Function这个构造函数创建的。
+
+		/*var fun = new Function("x","y","console.log('呵呵呵',x,y);");
+		fun(100,200);
+
+		setInterval("console.log(100)",1000);*/
+
+		//结论，所有的字符串形式的可执行代码都不要使用
+		
+
+
+
+
+	</script>
+</body>
+</html>
