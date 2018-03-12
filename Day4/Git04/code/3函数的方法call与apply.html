@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+		var fun = function(num,str){
+			console.log("我是fun",num,str,this);
+		};
+		fun(100,"普通调用");
+
+		//1 call()
+		// fun.call();
+		// fun.call(null);
+		fun.call({name:"jack"},200,"call调用");
+
+
+
+		//2 apply()
+		//  参数1 用于设置函数的this指向   参数2 需要传入的实参值，需要为数组形式(就一个)
+		// fun.apply();
+		// fun.apply(null);
+		fun.apply({name:"rose"},[300,"apply调用"]);
+
+		//call与apply的区别：call传入实参时需要单个传入，apply传入实参时需要为数组结构
+
+
+		// * 函数代码的执行方式有几种？
+		//	 1 普通调用
+		//   2 call()
+		//   3 apply()
+		//   4 事件驱动
+
+		// * 函数的概念：函数是由事件驱动的或在调用时执行的可重复使用的代码块。
+
+
+
+
+
+	</script>
+
+</body>
+</html>

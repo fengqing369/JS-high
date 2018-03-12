@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<img src="images/1.jpg" alt="">
+	<button>赞(0)</button>
+	<img src="images/2.jpg" alt="">
+	<button>赞(0)</button>
+	<img src="images/3.jpg" alt="">
+	<button>赞(0)</button>
+	<img src="images/4.jpg" alt="">
+	<button>赞(0)</button>
+
+	<script>
+		//功能描述：点击每个图片的点赞按钮，赞数增加
+
+		//1 获取元素
+		var btns = document.getElementsByTagName("button");
+
+		//2 设置一个赞数的值，点击后修改
+
+		function fun(){
+			//私有变量count,用于记录赞数，默认值为0
+			var count = 0;
+			//通过返回值的形式返回
+			return function (){
+				//每次触发后，赞数+1
+				count++;
+				//console.log(count);
+				//设置某个btn的文字内容
+				this.innerText = "赞("+count+")";
+			};
+		}
+
+	/*	//调用一次fun，就会形成一个闭包环境，内部具有一个私有变量
+		var result = fun();
+		//每次调用result就会对这个私有变量进行操作
+		result();//从0到1
+		result();//从1到2
+
+
+		//又形成一个闭包，内部也具有一个私有变量，与上一个私有变量是没有关系的
+		var result2 = fun();
+		result2();//从0到1*/
+
+
+	for(var i = 0; i < btns.length; i++){
+			//将fun()的返回值保存在每个按钮的点击事件中
+			//每次点击按钮时，相当于执行返回值函数
+
+			//3 修改按钮的内容值
+			// - 计数的值在返回值函数中，操作也需要在其中完成
+			// - 如何在返回值函数中去操作当前的按钮呢？
+			// - 通过调用的形式分析，发现this可以访问当前按钮，进行设置即可
+			/*btns[i].onclick = function (){
+				//每次触发后，赞数+1
+				count++;
+				//设置某个btn的文字内容
+				this.innerText = "赞("+count+")";
+			};*/
+			btns[i].onclick = fun();
+	}
+
+
+	
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+		
+
+	<script>
+		//高阶函数：指的是函数的一些高阶用法
+
+		//1 将函数作为函数参数使用
+
+		// 1.1 基本形式
+		/*function fun(fn){}
+
+		fun(function(){});*/
+
+
+		// 1.2数组中的一些使用回调函数的方法
+		//var arr = ["a","b","c","d","e"];
+		/*
+		for (var i = 0; i < arr.length; i++) {
+			//console.log(arr[i],i,arr);
+			arr[i] += "z";
+		}
+
+		console.log(arr);*/
+
+		//console.log("================分割线=================");
+
+		// forEach方法用于对数组进行基本遍历操作
+		//   - 跟for循环效果相同，只是封装后为面向对象的使用方式了
+		//   - 只能进行取值操作，不能进行修改
+		/*arr.forEach(function(element,index,arr){
+			//console.log(element,index,arr);
+			element += "z";
+		});
+		console.log(arr);*/
+
+
+		// map方法用于遍历，主要是进行值的修改操作使用
+		//   - 通过内部回调函数return的方式修改某个元素的值
+		//   - 不会修改原数组，map()方法的返回值为修改后的新数组
+		//   - 通常用于对数组值进行修改使用
+		/*var result = arr.map(function(ele,i,arr){
+			return ele + "z";
+		});
+		console.log(arr,result);*/
+
+		/*var arr = [1,2,3,4,5,6,7,8,9];
+
+		//检测是不是每个数组元素均满足检测条件
+		var result = arr.every(function(ele,i,arr){
+			return ele < 15;
+		});
+		console.log(result);*/
+
+
+		// 下面两个自己回去想办法搞定，写个小例子交回来
+		// some filter
+
+
+
+		//2 将函数作为返回值使用
+		// 2.1 基本使用:形式
+		var fun = function (){
+			return function(){
+			};
+		};
+
+		//result接收的返回值为函数体
+		var result = fun();
+		console.log(result);
+
+		// 2.2 使用此种方式解决问题
+		//     闭包
+
+
+
+
+
+	</script>
+
+</body>
+</html>

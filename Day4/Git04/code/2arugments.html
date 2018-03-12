@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<script>
+	//用于函数的arguments属性已经废弃，所以现在使用arguments对象
+	//arguments是伪数组(类数组)对象：没有数组方法
+
+	//1 使用方式：只能再函数内使用，表示当前函数的实参列表
+
+
+	//2 arguments的属性
+	// arugments.callee
+	// 可以获取到当前函数
+	/*var fun = function(a,b){
+		//console.log(arguments);
+		console.log(arguments.callee);//当前函数
+	};
+	fun(1,2,3,4,5);*/
+
+	//3 作用：
+	// 由于形参的设置时固定的，如果用户传入的实参更多时，只能使用arguments访问
+	// 模拟实现函数重载
+
+	//函数重载：
+	//    js中不存在函数重载
+	//    同名的函数，根据传入的参数不同，会执行不同的功能
+
+	/*function fun(a,b){
+		console.log("这是fun的第一种功能");
+	}
+	function fun(a,b,c){
+		console.log("这是fun的第二种功能");
+	}
+	fun(10,20);
+	fun(1,2,3);*/
+
+	/*function fun(){
+		if(arguments.length === 2){
+			console.log("这是fun的第一种功能");
+		}else if(arguments.length === 3){
+			console.log("这是fun的第二种功能");
+		}
+	}
+	fun(10,20);
+	fun(1,2,3);*/
+
+
+
+	//4 伪数组如何使用数组方法
+
+	// 4.1 为什么不能用
+	//     因为不是通过Array创建的，所以无法访问到Array.prototype
+
+	// 4.2 如何使用呢？
+	var fun = function(a,b){
+
+		console.log(arguments);
+
+		//下面两个函数是同一个函数
+		//[1,2,3].__proto__.push;
+		//Array.prototype.push;
+
+		//通过call借用数组push方法
+		Array.prototype.push.call(arguments,200);
+
+		//下面这个代码跟上面的代码功能相同，但是多创建了一个实例
+		//[].push.call(arguments,200);
+
+		//console.log(arguments);
+
+	};
+	fun(1,2);
+
+	//console.log([1,2,3]);
+
+
+	// 4.3 原因思考
+	//		 构造函数原型方法中的this为实例对象
+	//     只需要将this指向arguments即可
+	/*	Array.prototype.hehe = function(){
+		this
+	}*/
+
+
+	// *4.4 对象借用另一个对象的方法
+
+	var jack = {
+		name:"jack",
+		sayHi:function(){
+			console.log(this.name);
+		}
+	};
+	var rose = {
+		name:"rose",
+	};
+
+	jack.sayHi.call(rose);
+
+
+</script>
+
+</body>
+</html>

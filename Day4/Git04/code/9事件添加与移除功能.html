@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<button id="btn">按钮</button>
+
+
+	<script>
+
+		/*function fun(){}
+		btn.addEventListener("click",fun);
+		btn.removeEventListener("click",fun);
+
+
+		//使用上面的设置方式时，可以设置多次点击事件
+		//移除时，可以移除指定的某一个
+
+		//当我们进行addEventListener设置时，js会将所有设置过的事件处理程序保存在一个地方‘
+		var eventArr = [fn,fn];*/
+
+
+
+		var btn = document.getElementById("btn");
+
+		//前提：在当前案例中先只考虑btn的点击事件
+		// 1 实现多次设置点击事件不覆盖
+		// 2 实现指定事件处理程序的移除
+		function setClick(){
+			//将保存所有事件处理程序的函数设置为一个私有变量
+			var eventArr = [];
+
+			//设置事件
+			btn.onclick = function(){
+				//将所有的eventArr中的事件处理程序执行即可
+				for(var i = 0; i < eventArr.length; i++){
+					eventArr[i]();
+				}
+			};
+
+
+			//给当前闭包设置多个私有函数，并且返回
+			//由于有多个值需要返回，并且一个函数只能有一个返回值
+			//需要整体设置为一个对象后返回
+			return {
+				addClick:function(fn){
+					//需要做什么？将fn放入到数组eventArr中
+					eventArr.push(fn);
+				},
+				removeClick:function (fn){
+					//找到当前fn在eventArr中的位置，进行删除
+
+					//数组的indexOf在ie9以下不支持，此处随便用一用
+					/*var index = eventArr.indexOf(fn);
+					if(index !== -1){
+						eventArr.splice(index,1);	
+					}*/
+
+					for(var i = 0; i < eventArr.length; i++){
+					   if(eventArr[i] === fn){
+					   	eventArr.splice(i,1);	
+					   }
+					}
+					
+				}
+			};
+		}
+		//接受的返回值是一个对象，这个对象具有两个方法，一个用于添加事件，一个用于移除事件
+		var obj = setClick();
+		//思考调用的形式：
+		obj.addClick(function(){
+			console.log("功能1");
+		});
+		obj.addClick(function(){
+			console.log("功能2");
+		});
+
+		function fun(){
+			console.log("功能3");
+		}
+
+		obj.addClick(fun);
+
+		obj.removeClick(fun);
+
+
+	</script>
+
+
+</body>
+</html>

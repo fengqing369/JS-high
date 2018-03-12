@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<button id="btn">按钮</button>
+
+	<script>
+		//使用时分为绑定this与绑定实参
+
+		//1 绑定this
+
+		//以下代码为贪食蛇案例的部分代码：
+		/*Game.prototype.snakeRun = function(){
+				//var that = this;
+				//设置定时器，让小蛇进行自动运动
+				setInterval(function(){
+
+					//每隔100毫秒，让小蛇运动
+					//问题：小蛇对象时Game的实例对象的属性，通过this.snake访问
+					//      但是定时器内的this指向了window
+					this.snake.move();
+
+					//可以让定时器的函数参数使用bind方法绑定this，内部即可正常使用
+				}.bind(this),100);
+		};*/
+
+
+		//总结：上面的例子只是说明绑定this的其中一个场景
+		//     只要希望让某个函数内的this进行改变，即可使用
+
+
+
+
+		//2 绑定参数
+
+
+		/*// * 下面的代码为复习事件的多种使用方式
+		var btn = document.getElementById("btn");
+		btn.addEventListener("click",function(){
+			console.log("我是btn的点击事件1");
+		});
+
+
+		var fun = function(){
+			console.log("我是btn的点击事件2");
+		}
+
+		btn.addEventListener("click",fun);
+
+
+		//移除事件时，所有参数必须与设置时完全相同
+		btn.removeEventListener("click",fun);
+
+
+		btn.attachEvent("onclick",function(){
+			console.log("我是btn的点击事件");
+		});
+		btn.attachEvent("onclick",function(){
+			console.log("我是btn的点击事件");
+		});
+
+
+		//总结：
+		// 1 使用新的事件设置方式可以防止事件覆盖
+		// 2 可以移除某个指定的事件*/
+
+
+
+		//现在具有一个封装好的函数，可以用于设置事件
+
+		// * 这个函数封装不是重点
+		function addEvent(tag,eventType,fn){
+			if(tag.addEventListener){
+				tag.addEventListener(eventType,fn,false);
+			}else{
+				tag.attachEvent("on"+eventType,fn);
+			}
+		}
+
+		var btn = document.getElementById("btn");
+		/*addEvent(btn,"click",function(){
+			console.log("我是第一个功能");
+		});
+		addEvent(btn,"click",function(){
+			console.log("我是第二个功能");
+		});*/
+
+
+		//当我们需要多次给btn设置点击事件时，前两个参数都是固定的
+		//可以通过bind方式设置一个函数副本，从而方便使用
+		var btnAddEvent = addEvent.bind(null,btn,"click");
+
+		//看起来传入了一个参数，但是这实际上是参数3，参数1和2已经设置过默认值了
+		btnAddEvent(function(){
+			console.log("我是第一个功能");
+		});
+
+		btnAddEvent(function(){
+			console.log("我是第二个功能");
+		});
+
+
+		// 练习：
+		// bind方法在ie9以下不支持
+		// 自己查mdn找到解决方案
+
+
+
+	</script>
+
+
+</body>
+</html>

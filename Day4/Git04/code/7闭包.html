@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+
+	<script>
+		// 闭包：封闭的包装环境
+
+		// 1 基本说明
+		// 每个函数都可以称为是一个闭包的环境
+		// 闭包本身并不难，难在使用闭包解决问题的过程
+
+
+		// 2 使用闭包解决什么样的问题呢？
+		// 通过某种手段，在函数外可以多次操作函数内的某个数据
+		/*function fun(){
+			var num = Math.random();
+
+			return num;
+		}
+
+		//使用返回值的形式每次得到的结果是同一个数据值么？
+		//通过随机数的验证方式，发现，通过返回值的方式得到的结果不是同一个数据
+		var result1 = fun();
+		var result2 = fun();
+
+		console.log(result1,result2)*/
+
+		// 3 如何解决呢？
+
+
+
+		// 3.1 可以通过返回函数的方式多次获取一个局部变量的值
+		/*function fun(){
+			var num = Math.random();
+
+			function innerFun(){
+				//innerFun是fun内部的子作用域，可以对fun内的变量进行操作
+				console.log(num);
+			}
+
+			//通过返回值的形式将innerFun返回
+			return innerFun;
+		}
+
+		//接收返回值，值为一个函数，每次调用均可获取同一个局部变量的值
+		var result = fun();
+		result();
+		result();
+	*/
+
+		//3.2 对局部变量进行设置
+
+		/*//fun就是一个闭包
+		function fun(){
+
+			//私有变量
+			var num = 100;
+
+			//通过返回值的形式返回
+			return function (){
+				num++;
+				console.log(num);
+			};
+		}
+
+		//接收返回值，值为一个函数
+		var result = fun();
+		result();
+		result();*/
+
+		//好处：
+		// 安全：私有变量由于处于局部作用域，外界无法访问
+		// 可以自己设置指定的操作方式
+
+
+
+		//3.3 如何设置任意操作(作为了解，不要求掌握)
+		//fun就是一个闭包
+		/*function fun(){
+
+			//私有变量
+			var num = 100;
+
+			//通过返回值的形式返回
+			return function (fn){
+				fn(num);
+			};
+		}
+
+
+		//接收返回值，值为一个函数
+		var result = fun();
+
+		//希望在使用result时设置对私有变量的任意操作
+		result(function(data){
+			//console.log(data);
+			data++;
+			console.log(data);
+		});
+		//result(300);*/
+
+	</script>
+	
+</body>
+</html>

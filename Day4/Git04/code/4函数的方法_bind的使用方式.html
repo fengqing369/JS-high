@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		
+		//函数的方法 bind()
+
+		/*var fun = function(num,str){
+			console.log("我是fun",num,str,this);
+		};*/
+
+
+		//1 基本使用
+		//设置this指向后，返回当前函数的副本
+/*		fun();//会执行函数
+		fun.call({name:"jack"});//会执行函数，this指向修改了
+		fun.apply({name:"jack"});//会执行函数，this指向修改了*/
+
+/*		var resultFun = fun.bind({name:"jack"});//不会执行函数，this指向修改了
+		resultFun();
+		resultFun();
+		resultFun();*/
+
+		//2 区别：
+		//与上一组(call,apply)的区别
+		//call与apply调用后，函数会立刻执行
+		//bind调用后，函数不会立刻执行，而是返回副本
+
+		//3 实参传递的方式
+		/*var fun = function(num,str){
+			console.log("我是fun",num,str,this);
+		};
+		//如果使用bind方法时设置了实参值，则返回的函数副本对应实参位置永远是这个值了
+		var resultFun = fun.bind({name:"jack"},100);
+
+		resultFun();
+		resultFun();
+		resultFun();*/
+
+		/*fun(100,"我是普通调用");
+		//对函数副本进行调用时传入的实参会向后顺延
+		// 例如：resultFun这个函数在设置时num被设置为100，则本次传入的实参值对应的是形参str
+		resultFun("我是bind返回的函数");*/
+
+	</script>
+
+</body>
+</html>
