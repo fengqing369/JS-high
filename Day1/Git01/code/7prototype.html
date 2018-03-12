@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+		function CreateObj(name,age){
+			this.name = name;
+			this.age = age;
+		}
+
+		//每个函数都有一个(自带)属性：prototype 原型
+		//这个属性是一个对象，作用就是用于进行共有属性的保存使用的（相当于前面我们写的obj）
+		//console.log(CreateObj.prototype);//对象形式
+
+		//prototype属性称为原型属性，也称为原型对象
+
+		//直接给这个对象设置方法即可，设置后所有的实例对象均可使用这个方法
+		CreateObj.prototype.sayHi = function(){
+			console.log("你好，我是"+this.name,"这是设置给原型对象的方法");
+		};
+
+		//创建一个实例对象
+		var o1 = new CreateObj("张三",18);
+		//o1.sayHi();
+		//var o2 = new CreateObj("李四",21);
+		//o2.sayHi();
+		//console.log(o1.sayHi===o2.sayHi);//true
+
+		//疑问：为什么这个方法没有设置给实例对象本身，但是实例对象也可以使用呢？
+		console.log(o1);
+
+		//通过观察我们发现，每个实例对象都具有一个自带的属性__proto__，这个属性中具有设置给CreateObj.prototype的方法
+
+		//基本访问规则：当我们使用一个对象的属性时，如果自身有，就使用，如果没有，则查找__proto__中，如果有，就使用。
+		/*o1.sayHi = function(){
+			console.log("这是实例对象自身的方法");
+		};
+
+		console.log(o1);
+		o1.sayHi();
+		*/
+
+		//思考：设置给CreateObj.prototype的方法，在o1.__proto__中可以看到，是不是说明这两个对象之间有一些不可描述的关系呢？
+		//说明两个对象实际上确实是同一个对象
+		console.log(CreateObj.prototype === o1.__proto__);
+
+		//图示见图片文件
+
+		//总结：
+		//	使用场景：当我们需要给实例对象设置方法时，就使用prototype属性
+
+
+		//原型对象都会具有一个属性constructor，指向了构造函数
+		//我们可以通过实例对象去访问这个属性
+		console.log(o1.constructor);
+
+
+	</script>
+</body>
+</html>

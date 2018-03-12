@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		//复杂数据类型有哪些？
+		//object 只有一个
+
+		//在js中实际上其他的复杂数据类型形式都是object
+
+
+		/*//1 数组：
+		//		保存多个数据，有序的数据存储方式，元素均按照索引值排列(索引值就是属性名)
+		var peoName = ["张三1","张三2","张三3","张三4","张三5","张三6"];
+		var phoneNum = [34567845678,1234533643,123231,123123213,123123123,1231232];
+
+		console.log("我是"+peoName[2]+"，我的手机号是"+phoneNaum[2]);
+
+		//2 对象：
+		//    对象与数组使用的区别在于，可以使用一组数据表示两个含义
+		var dianHuaBen = {
+			zhangsan1:3456456,
+			zhangsan2:456785678
+		};*/
+
+
+		/*//冒泡排序：
+		var arr = [1,2,3,5,4];
+		var j,temp,flag;
+
+		var count = 0;//用于记录比较的轮数
+
+		//外层循环控制比较的趟数
+		//使用假设成立法：(使用变量标记的方式)
+		//1 找到程序中不确定的操作，设置假设条件
+		//2 对假设条件进行验证(设置一个可以使假设失败的条件)
+		//3 对假设条件的最终值进行检测，设置操作
+
+		for(var i = 0;i < arr.length - 1; i++){
+			count++;
+			flag = true;//假设本轮执行排序后可以跳出
+
+			for(j = 0; j < arr.length - 1 - i; j++){
+				if(arr[j] > arr[j+1]){
+					temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+					//只要进入到if中，说明排序可能没有完毕，设置假设条件为false
+					//阻止跳出
+					flag = false;
+				}
+			}
+			//根据flag的值，设置操作
+			if(flag){
+				break;
+			}
+		}
+
+		//我们需要在数组排序完毕后立刻结束？
+		//什么时候可以确定排序完毕了呢？
+		console.log(arr,count);*/
+
+
+		//数组去重：
+		var arr = [5,1,2,1,2,2,1,2,1,2,3,4,3,4,5,3,4,5,4,3,2,1];
+		//希望得到的结果为[1,2,3,4,5]
+		//console.log(resultArr);//[1,2,3,4,5]
+
+		//1 创建一个结果数组
+		var resultArr = [arr[0]];
+		var flag;
+		//2 遍历数组
+		for(var i = 1; i < arr.length; i++){
+
+			/*//尝试将arr[i]放入到resultArr中
+			  //错误写法说明：
+			for(j = 0; j < resultArr.length; j++){
+
+				//如果arr[i]与resultArr中的任意一个元素都不相等时，进行放入
+				if(arr[i] !== resultArr[j]){
+					//错误的原因，希望的是每个都不等，但是书写的代码是某一个不等就放入了
+					resultArr.push(arr[i]);
+				}
+			}*/
+
+
+			// 正确的实现方式
+			flag = true;//假设当前arr[i]可以放入到resultArr中
+			for(j = 0; j < resultArr.length; j++){
+				//设置可以让假设失败的条件:如果偶遇任何一个元素相等，即说明不能放入
+				if(arr[i] === resultArr[j]){
+					flag = false;
+				}
+			}
+			//根据flag的值设置最终操作
+			if(flag){
+				resultArr.push(arr[i]);
+			}
+
+		}
+		console.log(resultArr);
+
+
+
+		//简单的实例：
+	/*	var arr = [5,1,2,1,2,2,1,2,1,2,3,2,2,1,2,1,2,3,2,2,1,2,1,2,3,2,2,1,2,1,2,3,2,2,1,2,1,2,3,2,2,1,2,1,2,3,2,2,1,2,1,2,3,2,2,1,2,1,2,3,4,5,3,4,5,4,3,2,1];
+		//想知道数组arr中的1出现的次数是几次？
+		var count = 0;
+		for (var i = 0; i < arr.length; i++) {
+			if(arr[i] === 1){
+				count++;
+			}
+		}*/
+
+
+		//希望检测的数据有五个，得到的结果的个数也是五个
+		var countArr = [],count;
+
+		//取出每个要进行计数的数据arr[i]
+		for (i = 0; i < resultArr.length; i++) {
+
+			count = 0;//对arr[i]的计数进行初始化
+
+			//使用resultArr[i]与原数组arr中的每个元素比较计数
+			for(j = 0;j<arr.length;j++){
+				if(resultArr[i] === arr[j]){
+					count++;
+				}
+			}
+
+			//将count的值保存到countArr中
+			countArr.push(count);
+		}
+		console.log(countArr);
+
+		//使用数组的操作方式我们发现，由于数组只能保存一组值，在这个需求中酒需要使用两个数组
+
+
+
+	</script>
+</body>
+</html>

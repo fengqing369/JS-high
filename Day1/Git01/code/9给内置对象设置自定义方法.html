@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+		
+		var arr = new Array(1,2,3);
+		console.log(arr);
+
+		//数组也是对象，也是通过构造函数创建的，数组这个实例对象的__proto__就指向了Array.prototype
+
+		Array.prototype.sayHi = function(){
+			console.log("我是一个数组");
+		};
+
+		arr.sayHi();
+		[2,3,4].sayHi();
+		//想要给内置对象设置自定义的方法，只需要设置给对应构造函数的prototype即可
+		//这种方式不推荐大家大量的使用
+
+	</script>
+
+
+</body>
+</html>

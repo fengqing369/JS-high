@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<ul id="list">
+		
+	</ul>
+
+
+	<script>
+		/*
+		//根据这个arr的内容创建一个列表
+		var arr = ["张三","李四","王五"];
+		var list = document.getElementById("list");
+		var li;
+		for (var i = 0; i < arr.length; i++) {
+			li = document.createElement("li");
+			//由于innerHTML的执行效率很低，所以不推荐在循环内直接使用(具体为什么找个时间说)
+			li.innerText = arr[i];
+			list.appendChild(li);
+		}
+		*/
+
+
+		//对象的使用：
+		//	1 作为数据存储使用
+		//      注意：当我们将对象作为数据存储使用时一定没有方法这个东西
+		//      好处：可以以"键值对"形式进行数据的保存
+		//var obj = {};
+		//obj.name = "张三";
+
+		//使用数据存储功能完成数组去重并计数的案例
+
+
+		/*var arr = ["a","a","b",5,1,2,1,1,2,3,2,2,1,2,1,2,3,4,3,4,5,3,4,5,4,3,2,1];//货车
+		//创建一个货物单
+		var obj = {},item;
+
+		//将货车中的货物一个个的拿过来看
+		for(var i = 0;i<arr.length;i++){
+			//看一看arr[i]这个货物有没有(检测obj中是否含有arr[i]这个属性)
+			item = arr[i];
+
+			//如果有值，这个值一定大于等于1
+			//如果没有，默认为undefined
+			if(obj[item]){
+				//说明有值，让值++
+				obj[item]++;
+			}else{
+				//说明没有值，设置值为1
+				obj[item] = 1;
+			}
+
+		}
+		console.log(obj);*/
+
+
+
+
+		//  2 作为工具使用
+		//		Math Array 
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

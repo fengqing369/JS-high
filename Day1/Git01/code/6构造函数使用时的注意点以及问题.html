@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		//1 使用构造函数时需要注意的点
+		/*function CreateObj(){
+			this.name ="张三";
+
+			//给构造函数设置返回值
+			//1 返回值为基本数据类型：会被忽略
+			// return "100";
+
+			//2 返回值为复杂数据类型
+			// 如果返回值为复杂数据类型，这个值会替换掉原有的对象
+			return {name:"李四"};
+		}
+		var o1 = new CreateObj();
+		console.log(o1);*/
+
+
+		//2 构造函数的问题
+		/*function CreateObj(name,age){
+			this.name = name;
+			this.age = age;
+			this.sayHi = function(){
+				console.log("我是"+this.name);
+			};
+		}
+		
+		//创建了多个实例，o1和o2中的属性值是否相同？
+		var o1 = new CreateObj("张三",18);
+		//o1.sayHi();
+		var o2 = new CreateObj("李四",21);
+		//o2.sayHi();
+
+		//我们发现，使用同一个构造函数创建的多个实例对象的所有属性与方法均不是相同的
+		console.log(o1.sayHi === o2.sayHi);//false
+
+		//思考：属性通常都是不同的，但是由于方法表示功能，功能通常是相同的，所以方法保存为多个相同的函数是没有意义的，并且浪费空间*/
+
+
+
+		//新需求：想要将多个实例的方法值保存为一个共有的函数
+
+		//使用命名函数对多个实例的共有方法值进行统一保存
+		/*function sayHi(){
+			console.log("我是"+this.name);
+		}
+
+		function CreateObj(name,age){
+			this.name = name;
+			this.age = age;
+			// * 此处只是为了给实例对象设置方法，而不是在这个位置执行这个方法
+			//	 所以此处一定不能加()
+			//	 this.sayHi = sayHi();
+			this.sayHi = sayHi;
+		}
+
+		var o1 = new CreateObj("张三",18);
+		//o1.sayHi();
+		var o2 = new CreateObj("李四",21);
+		//o2.sayHi();
+
+		//每个对象在内存中都会占用一定的空间,每个对象内的属性也会占用对象内部的部分空间
+		//每次创建一个实例对象都会占用一个空间，属性的值通常是不同的，但是方法值是相同的
+		//通过命名函数的保存，可以实现方法值的共享。
+		console.log(o1.sayHi === o2.sayHi);//true*/
+
+
+		//当方法比较多的情况下：需要使用多个函数进行保存，导致新的问题。
+		/*function sayHi1(){
+			console.log("我是"+this.name);
+		}
+		function sayHi2(){
+			console.log("我是"+this.name);
+		}
+		function sayHi3(){
+			console.log("我是"+this.name);
+		}
+		function sayHi4(){
+			console.log("我是"+this.name);
+		}*/
+
+		//所有的全局变量与函数都是window对象的属性和方法
+		//上面的代码声明了一大堆的全局函数，如何优化？
+
+		//解决方式，可以使用一个对象，对所有的共有函数进行统一保存
+		var obj = {
+			sayHi1:function (){
+			console.log("我是"+this.name);
+			},
+			sayHi2:function (){
+				console.log("我是"+this.name);
+			},
+			sayHi3:function (){
+				console.log("我是"+this.name);
+			}
+		};
+
+		function CreateObj(name,age){
+			this.name = name;
+			this.age = age;
+			this.sayHi1 = obj.sayHi1;
+			this.sayHi2 = obj.sayHi2;
+			this.sayHi3 = obj.sayHi3;
+		}
+
+		var o1 = new CreateObj("张三",18);
+		var o2 = new CreateObj("李四",21);
+		o1.sayHi1();
+		o2.sayHi1();
+		console.log(o1.sayHi1===o2.sayHi1);//true
+
+
+
+
+
+
+
+		/*// == 与 === 的区别
+		// 1 基本数据类型：
+		// 2 复杂数据类型：
+		//		两个复杂数据类型在进行比较时，只有是同一个对象时才会相等
+
+		//下面的例子中，两个数组虽然长的相同，但是完全不是一个数组，所以不相等
+		console.log([1,2,3] == [1,2,3]);
+		console.log([1,2,3] === [1,2,3]);
+
+		console.log([] === []);
+		var arr = [1,2,3];
+		var arr3 = arr;
+		console.log(arr === arr3);*/
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+
+		//undefined - 是一个预定义的全局变量
+
+		(function(window,document,undefined){
+
+			//自调用函数的作用：
+			// 1 包裹作用域，减少全局变量的使用
+
+			// 2 减少作用域的访问次数
+			//   通过传参的方式设置常用的值
+
+			//使用方式：
+			//	- 在每一个功能外包裹一个自调用函数即可
+			//  - 将需要多次访问的值设置在参数位置变成局部变量，减少作用域的检索次数
+
+
+			//如果希望内部的一些值可以被外部访问，可以将对应的数据暴露给全局作用域
+			var num = 100;
+			window.num = num;
+
+
+		})(window,document);
+
+		//在全局作用域中访问
+		console.log(num);
+
+
+	</script>
+
+
+</body>
+</html>

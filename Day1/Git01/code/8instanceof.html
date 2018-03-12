@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		
+		//数组的数据类型？array
+
+		//1 typeof检测的问题：
+		//console.log(typeof null);//"object"
+		//console.log(typeof [1,2,3]);//"object"
+
+		//实际上typeof在检测数据类型时，如果数据为一个指针，会认为是object
+
+		//2 其他常用的类型检测方式：
+		// - Array.isArray() ie9以下不支持
+		//	 console.log(Array.isArray([1,2,3]));//如果是数组返回true
+		// - instanceof 需要前后两个操作数
+		//	 前操作数为实例对象，后操作数为构造函数
+		//	 如果实例对象是通过构造函数创建的，返回true，否则返回false
+		//	 console.log([1,2,3] instanceof Array);
+		//	 console.log(200 instanceof Array);
+		// - Object.prototype.toString.call()
+		//   返回的结果为数据类型名:(固定用法，记住即可)
+		/*
+			console.log(Object.prototype.toString.call(null));//"[object Null]"
+			console.log(Object.prototype.toString.call([1,2,3]));//"[object Array]"
+		function typeName(data){
+			return Object.prototype.toString.call(data);
+		}
+		*/
+		//总结：以后需要检测实例对象和构造函数之间关系的时候，就使用instanceof
+	</script>
+
+
+</body>
+</html>
