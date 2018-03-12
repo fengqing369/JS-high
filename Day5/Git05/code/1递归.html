@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		
+		//1 递归：
+		//  函数调用自身
+
+		/*function fun(){
+			fun();
+		}
+		fun();*/
+
+		//2 递归的问题
+		//   2.1 死循环
+		//   2.2 执行效率问题
+
+
+		//3 如何解决递归的问题
+		//	3.1 给递归设置结束条件
+	
+
+		//例如，希望函数fun递归执行10次
+		/*var count = 0;
+		function fun(){
+			count++;
+
+			//设置结束条件
+			if(count === 10){
+				return;
+			}
+			fun();
+		}
+		fun();
+		console.log(count);*/
+
+
+			//  3.2 性能优化
+
+
+		//4 递归的使用步骤
+		//  4.1 书写一个基本递归结构
+		//	4.2 找到需求中的规律
+		//  4.3 设置结束条件
+		//  4.4 性能优化
+
+
+		//练习1：
+	  /*	//计算1到任意正整数的和
+		function getSum(n){
+			//return 4 + getSum(3);
+			// 					 3 + getSum(2)
+			// 					 	   2 + getSum(1)
+			// 									 设置结束条件：return 1
+			//规律为  return n + getSum(n-1);
+
+			if(n === 1){
+				return 1;
+			}
+
+			return n + getSum(n-1);
+
+		}
+		var result = getSum(4);
+		console.log(result);
+    */
+
+	//练习2：
+/*	// 有如下数列，观察数列的规律
+	// 1 1 2 3 5 8 13 21 34 55 89 
+
+	//设置一个函数，用于计算数列中任意位置的值
+	// 传入的值为需要的值在数列中的位置 (第几个)
+	// 返回的结果为对应的值
+
+	// 规律为：每个数是前两个数的和，最前两个数为 1
+
+	function getFB(n){
+		//设置数列结束条件
+		if(n === 1 || n === 2){
+			//数列中第一个值与第二个值是已知的，为1
+			return 1;
+		}
+		//数列中第n个位置的值 为第n-1与第n-2位置的值的和
+		return getFB(n-1) + getFB(n-2);
+	}
+
+	var result = getFB(11);
+	console.log(result);
+*/
+
+
+	//性能问题：
+	//通过计数的方式查看递归函数的执行次数
+	/*var count = 0;
+	function getFB(n){
+		count++;
+		//设置数列结束条件
+		if(n === 1 || n === 2){
+			//数列中第一个值与第二个值是已知的，为1
+			return 1;
+		}
+		//数列中第n个位置的值 为第n-1与第n-2位置的值的和
+		return getFB(n-1) + getFB(n-2);
+	}
+
+
+	//通过观察，我们发现递归具有执行效率问题，而且比较严重
+	// 计算低11个数，调用 170+   计算第20个数  调用10000+  计算第70个数，浏览器卡了半天，最终也没出来
+	var result = getFB(30);
+	console.log(result);
+	console.log(count);*/
+
+
+
+	//解决性能问题的方式：
+	//  通过记录计算过的数据，减少函数执行次数
+	//  思考数据的结构：位置数 对应 值
+	//      使用对象形式
+
+	/*
+
+	var obj = {1:1,2:1};
+
+	var count = 0;
+	function getFB(n){
+		count++;
+		//当计算某个位置的值时，先检测obj中是否存在这个位置的值，如果有，直接返回
+		//return getFB(n-1) + getFB(n-2);
+
+		if(obj[n]){
+			//如果进入if，说明存在，直接返回obj[n]
+			return obj[n];
+		}else{
+			//如果进入else，说明没有这个值，进行计算
+			//并且将计算结果保存在obj中
+			obj[n] = getFB(n-1) + getFB(n-2);
+			return obj[n];
+		}
+	}
+
+
+	//通过观察，我们发现递归具有执行效率问题，而且比较严重
+	// 计算低11个数，调用 170+   计算第20个数  调用10000+  计算第70个数，浏览器卡了半天，最终也没出来
+	var result = getFB(12700);
+	console.log(result);
+	console.log(count);*/
+
+
+
+
+
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<pre>
+
+<div>
+	呵呵
+	哈哈
+</div>
+
+	</pre>
+	<script>
+		//1 范围类
+		//var reg = /[c-l]/;
+
+
+		//2 组合类
+		//同时设置多种类型
+		// var reg = /[0-9a-gH-M]/;
+
+		//所有大小写字母与数字
+		// /[0-9a-zA-Z]/;
+
+		//3 预定义类
+		//转义符的使用演示：
+		//		document.write("<pre><div>哈哈\n哈哈</div></pre>");
+
+		//  \d - [0-9] - 数字字符
+		//console.log(/\d/.test("1"));
+		//console.log(/\d/.test("abc"));
+
+		//  \D - [^0-9] - 非数字字符
+		//console.log(/\D/.test("1"));
+		//console.log(/\D/.test("abc123"));
+
+		//  \w - [a-zA-Z0-9_] - 单词字符
+		/*console.log(/\w/.test("dfghjk"));
+		console.log(/\w/.test("123213213"))
+		console.log(/\w/.test("ADWDAW"))
+		console.log(/\w/.test("_"))
+		console.log(/\w/.test("+-*!/%&|(")); */
+
+		// \W -  [^a-zA-Z0-9_] - 非单词字符
+		/*console.log(/\W/.test("dfghjk"));
+		console.log(/\W/.test("123213213"))
+		console.log(/\W/.test("ADWDAW"))
+		console.log(/\W/.test("_"))
+		console.log(/\W/.test("+-*!/%&|("));*/
+
+		//  \s - [\f\t\n\r等] - 不可见字符 (通常用于匹配空格换行等内容)
+		//console.log(/\s/.test("fydguajida"));
+		//console.log(/\s/.test("fydgu   ajida"));
+
+		//  \S - [^\f\t\n\r等] - 可见字符
+		//console.log(/\S/.test("fydguajida"));
+		//console.log(/\S/.test("   "));
+
+		//  . - [^\r\n] - 可见字符
+		// 除回车\r  与换行\n以外的其他字符 （在现代计算机中\r和\n和\r\n是相同的）
+		console.log(/./.test("fydguajida"));
+		console.log(/./.test("   "));
+		console.log(/./.test("\n"));
+
+
+		// 注意： \S 与 .都用于匹配任意的可见字符，点的匹配范围比\S大，通常使用.
+
+		
+
+	</script>
+</body>
+</html>

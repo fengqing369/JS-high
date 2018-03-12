@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		//1 创建方式
+		//var reg = new RegExp("abc");
+		//var reg = /abc/;
+		//console.dir(reg);
+
+
+		//2 简单类的使用
+		// 可以匹配含有内部字符abc(连续的)的字符串
+		var reg = /abc/;
+
+		//3 匹配方法:
+		// 语法结构：   正则对象.test(字符串);
+		// 返回值：    匹配成功返回true，否则返回false
+
+		console.log(reg.test("tcytbhjkdtrchb"));//false
+		console.log(reg.test("tcytbhjabckdtrchb"));//true
+		console.log(reg.test("abzzckdtrchb"));//false
+
+
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+		//浅拷贝：
+		/*var obj = {
+			name:"jack",
+			age:18,
+			gender:"female",
+			hobbies:{
+				swim:"游泳",
+				eat:"各种吃"
+			}
+		};
+
+		var obj2 = {};
+		for(var k in obj){
+			obj2[k] = obj[k];
+		}
+
+		obj.name = "rose";
+		obj.hobbies.swim = "今天不游泳了";
+
+		//由于obj中的某个属性也是对象形式，进行拷贝操作时使用赋值运行导致两者相同
+		//通过修改发现确实相同
+		console.log(obj);
+		console.log(obj2);*/
+
+
+		//深拷贝：
+		//  完全拷贝对象内的所有属性(包括属性的属性，达到完全无关的目的)
+		var obj = {
+			name:"jack",
+			age:18,
+			gender:"female",
+			isOld : false,
+			money:undefined,
+			wife:null,
+			hobbies:{
+				swim:"游泳",
+				eat:"各种吃",
+				daPai:{
+					puKe:"各种打",
+					douDiZhu:"各种斗"
+				}
+			},
+			sons:["zhangSan","lisi","wangwu"]
+		};
+
+		//currentObj表示哪个元素要被拷贝
+		//targetObj表示要拷贝到哪个对象中
+		function deepCopy(currentObj,targetObj){
+
+			for(var k in currentObj){
+
+				if(typeof currentObj[k] != "object" || currentObj[k] === null){
+					//基本拷贝方式只适用于基本数据类型
+					targetObj[k] = currentObj[k];
+				}else{
+					//如果进入else，说明currentObj[k]属性值为复杂数据类型,想要复制复杂数据类型需要使用deepCopy函数
+
+					//要求:两个参数都必须为对象形式，由于targetObj[k]为undefined，需要先赋值为对象再使用
+
+					//完善功能：复杂数据类型值有可能是对象，也有可能是数组，需要进行判断后再设置
+					targetObj[k] = currentObj[k] instanceof Array ? [] : {};
+
+					deepCopy(currentObj[k],targetObj[k]);
+				}
+			}
+		}
+
+
+		var obj2 = {};
+		deepCopy(obj,obj2);
+
+		
+		obj.name = "rose";
+		obj.hobbies.swim = "今天不游泳了";
+		obj.hobbies.daPai.puKe = "打扑克";
+
+		//由于obj中的某个属性也是对象形式，进行拷贝操作时使用赋值运行导致两者相同
+		//通过修改发现确实相同
+		console.log(obj);
+		console.log(obj2);
+
+
+
+	</script>
+
+
+</body>
+</html>

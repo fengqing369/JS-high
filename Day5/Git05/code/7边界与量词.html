@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		//边界
+		//1 匹配起始位置
+		//  标识方式：在正则最开始书写一个^
+		/*var reg = /^abc/;
+		console.log(reg.test("abcgygyu"));
+		console.log(reg.test("zzzabcgygyu"));*/
+
+		//2 匹配结束位置
+		//  标识方式：在正则的最后书写一个$
+		/*var reg = /abc$/;
+		console.log(reg.test("gygyuabc"));
+		console.log(reg.test("zzzabcgygyu"));
+		*/
+
+		//3 严格匹配
+		//  必须与设置的匹配字符内容完全一致。
+		//  设置方式：同时使用^$
+		/*var reg = /^abc$/;
+		console.log(reg.test("abc"));//true
+		console.log(reg.test("abc1"));//false
+		console.log(reg.test("1abc"));//false
+		console.log(reg.test("abcabc"));//false*/
+
+
+
+		//自定义量词：
+
+		//1 指定个数  {n}
+		/*var reg = /^a{4}$/;
+		console.log(reg.test("aaa"));//false
+		console.log(reg.test("aaaa"));//true
+		console.log(reg.test("aaaaa"));//false
+		*/
+
+		//2 指定至少几个  {n,}
+		/*var reg = /^a{4,}$/;
+		console.log(reg.test("aaa"));//false
+		console.log(reg.test("aaaa"));//true
+		console.log(reg.test("aaaaa"));//true
+		console.log(reg.test("aaaaaaaaa"));//true*/
+
+		//3 出现n-m个  {n,m}
+		/*var reg = /^a{4,6}$/;
+		console.log(reg.test("aaa"));//false
+		console.log(reg.test("aaaa"));//true
+		console.log(reg.test("aaaaa"));//true
+		console.log(reg.test("aaaaaa"));//true
+		console.log(reg.test("aaaaaaaaa"));//false*/
+
+		//预定义量词
+		// *  {0,} - 出不出现均可匹配成功
+		/*var reg = /^a*$/;
+		console.log(reg.test(""));
+		console.log(reg.test("a"));
+		console.log(reg.test("aaaa"));
+		console.log(reg.test("aaaaaa"));
+		console.log(reg.test("aaaaaaaaaaaaaaaaaaa"));*/
+
+		//下面的邮箱匹配中，.com与.cn的部分可能都有，也可能有某一个，可以使用*
+		/*wuyou@qq.com
+		wuyou@sina.com.cn.qqq
+		/^\w{6,10}@\w{2,7}\.\w{2,5}(\.\w{2,5})*$/;*/
+
+		// +  {1,} - 至少出现1次
+		/*var reg = /^a+$/;
+		console.log(reg.test(""));//false
+		console.log(reg.test("a"));
+		console.log(reg.test("aaaa"));
+		console.log(reg.test("aaaaaa"));
+		console.log(reg.test("aaaaaaaaaaaaaaaaaaa"));*/
+		/*wuyou@qq.com
+		wuyou@sina.com.cn.qqq
+		/^\w{6,10}@\w{2,7}(\.\w{2,5})+$/;*/
+
+		// ?  {0,1}  出现0次或1次
+		var reg = /^a?$/;
+		console.log(reg.test(""));//true
+		console.log(reg.test("a"));//true
+		console.log(reg.test("aaaa"));//false
+		console.log(reg.test("aaaaaa"));//false
+		console.log(reg.test("aaaaaaaaaaaaaaaaaaa"));//false
+
+	</script>
+
+</body>
+</html>

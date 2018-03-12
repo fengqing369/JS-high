@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		//1 字符类
+		//  标识方式，在正则内部书写一个[]
+		//  []整体表示一位字符,这一位字符可以是[]内部的任意一个
+		/*var reg = /[abc]/;
+		console.log(reg.test("zzazz"));//true
+		console.log(reg.test("zzbzz"));//true
+		console.log(reg.test("zzczz"));//true
+		console.log(reg.test("zzzzz"));//false*/
+
+
+		//2 反向类
+		//	反向类是对字符类功能的扩展
+		//  标识方式，在字符类的[的后面写一个 ^
+		//  作用：标识除内部字符外的其他字符可以匹配成功
+		/*var reg = /[^abc]/;
+		console.log(reg.test("zzazzz"));//true
+		console.log(reg.test("abcbac"));//false
+		console.log(reg.test("12333"));//true*/
+
+
+		//3 或者操作符
+
+		//正则/a|b|c/; 与  /[abc]/; 功能相同
+
+		//注意与字符类的区别：
+		//1 如果是多种单个字符的匹配，使用字符类
+		//2 如果是多种多个字符的匹配，使用或者操作符
+		var reg = /ab|bc|cd/;
+		console.log(reg.test("zzabzz"));//true
+		console.log(reg.test("zzbczz"));//true
+		console.log(reg.test("zzcdzz"));//true
+		console.log(reg.test("zdzazbzcz"));//false
+
+	</script>
+
+
+</body>
+</html>
