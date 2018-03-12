@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;padding: 0;
+		}
+		#map{
+			width: 800px;
+			height: 600px;
+			background-color: #ccc;
+			position: relative;
+		}
+
+		#map div{
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="map"></div>
+
+	<script>
+		//由于要使用面向对象方式进行编程，所以需要先分析案例中需要哪些对象
+
+		//需要4个部分：
+		//1 地图：只需要书写一个盒子即可
+		//		设置宽高与背景色，由于内部的小蛇与食物会出现在地图中的任意位置，所以需要给地图设置相对定位。
+		//2 食物:
+		//      由于页面中可能出现n个食物，所以提前设置一个构造函数，在需要新食物时进行创建即可
+		//3 小蛇
+		//4 游戏控制对象(控制游戏什么时候结束)
+
+
+		//每个功能部分都是相互独立的，每个部分都可以设置一个自调用函数进行包裹
+
+		//食物对象的实现：
+		(function(){
+
+			function Food(options){
+				//属性
+				this.width = options.width || 20;
+				this.height = options.height || 20;
+				this.bgColor = options.bgColor || "green";
+
+				//设置盒子的位置属性:
+				//    位置设置时使用left和top，但是这个值不能随便设置，需要有固定的间隔
+				//    这个间隔就是一个盒子的宽度
+				//	  所以我们只需要设置一个随机的坐标值即可(范围为0-39之间的随机整数)
+				this.x = 0;
+				this.y = 0;
+
+				//为了功能扩展方便，可以将地图也设置为一个属性，表示这个食物的放置位置
+				this.map = options.map;
+
+				//这个属性用于保存创建过的食物盒子(DOM元素)
+				this.element;
+			}
+
+			//设置方法：
+			//  init 表示初始化
+			Food.prototype.init = function(){
+
+				//在创建新食物之前将旧的食物删除
+				//检测this.element属性中是否存在一个DOM对象，如果有，删除，如果没有，直接创建新的
+				if(this.element){
+					//从地图中删除这个元素
+					this.map.removeChild(this.element);
+				}
+
+				//--------下面的内容为新食物盒子的创建操作---------
+				//1 创建一个盒子div
+				var div = document.createElement("div");
+
+				//使用element属性保存创建的食物盒子
+				this.element = div;
+
+				//2 设置样式
+				div.style.width = this.width + "px";
+				div.style.height = this.height + "px";
+				div.style.backgroundColor = this.bgColor;
+
+				//3 计算随机的left与top
+				var maxWidthCount = Math.floor(this.map.offsetWidth / this.width);
+				var maxHeightCount = Math.floor(this.map.offsetHeight / this.height);
+				this.x = Math.floor(Math.random() * maxWidthCount);
+				this.y = Math.floor(Math.random() * maxHeightCount);
+				div.style.left = this.x * this.width + "px";
+				div.style.top = this.y * this.height + "px";
+
+				//4 放入到地图中
+				this.map.appendChild(div);
+
+			}
+
+
+			//下面的所有代码都是用于检测功能是否正常的，不是真正使用的代码
+
+			
+			//食物对象的功能需要结合小蛇对象与游戏控制对象共同使用，需要暴露给全局作用域
+			window.Food = Food;
+
+		})();
+
+
+		//小蛇对象
+		(function(){
+
+			function Snake(options){
+				//设置小蛇的属性
+				//小蛇每个盒子的宽高都是相同的，但是颜色是不同的
+				this.width = options.width || 20;
+				this.height = options.height || 20;
+
+				//根据小蛇的初始位置设置坐标值
+
+				//由于蛇身有多个部分（多个盒子），坐标与背景色都是不同的
+				//所以设置为多个对象形式进行分别保存
+				this.body = [
+					{x:1,y:1,bgColor:"orange"},
+					{x:2,y:1,bgColor:"orange"},
+					{x:3,y:1,bgColor:"red"}
+				];
+
+				//地图：小蛇最终要放置的位置
+				this.map = options.map;
+
+				//elements属性用于保存蛇身的小盒子
+				this.elements = [];
+			}
+
+			//设置小蛇的初始化方法
+			Snake.prototype.init = function(){
+				//删除旧的蛇身:
+				//由于蛇身的结构为多个，并且保存在数组中，所以如果没有任何一个蛇身，循环是不会执行的
+				//所以不需要设置检测
+
+				//如果使用正向遍历操作，会出现跳项的问题
+				/*var arr = [1,2,3,4,5];
+				for(var i = 0; i < arr.length; i++){
+					arr.splice(i,1);
+				}
+				console.log(arr);*/ //没有删除掉所有的元素，需要更改为反向遍历
+
+				for (var i = this.elements.length - 1; i >= 0; i--) {
+					this.map.removeChild(this.elements[i]);
+				}
+				//进行数组的清除
+				this.elements = [];
+
+				//------------后面的代码为新蛇身创建的代码-------------
+				//1 创建结构div
+				var body = this.body;
+				var div,currentBody;
+				for (i = 0; i < body.length; i++) {
+					//currentBody用于缓存body中的某个对象值
+					currentBody = body[i];
+					div = document.createElement("div");
+
+					//2 设置样式(设置宽 高 背景色 left top)
+					div.style.width = this.width + "px";
+					div.style.height = this.height + "px";
+					div.style.backgroundColor = currentBody.bgColor;
+					div.style.left = currentBody.x * this.width + "px";
+					div.style.top = currentBody.y * this.height + "px";
+
+					//3 放入到地图中显示
+					this.map.appendChild(div);
+
+					// --- 后期添加的功能，保存蛇身的盒子
+					this.elements.push(div);
+				}
+
+
+				//console.log(this.elements);
+			};
+
+			//设置小蛇的移动方法:
+			Snake.prototype.move = function(){
+				//通过观察我们发现，每次小蛇移动时，只有蛇头的坐标是最新的，其余蛇身盒子的坐标都是以前的旧值(需要进行错位)
+
+				for(var i = 0; i < this.body.length - 1; i++){
+					//第i个元素需要更新为i+1的值
+
+					//这种方式设置完毕后看似是没有问题的
+					//但是当修改啊了蛇头的坐标后，导致蛇脖子的坐标也随之修改(原因是，对复杂数据类型进行了复制操作)
+					this.body[i].x = this.body[i+1].x;
+				}
+
+				console.log(this.body);//打印后发现确实是修改成功了
+
+				//蛇头在循环中是没有被处理到的，所以需要单独处理
+				//默认为向右运动，设置x++即可
+				this.body[this.body.length - 1].x++;
+
+				//处理后发现，由于更新坐标时是对对象进行复制操作，导致了两个对象变成了同一个对象
+				//需要回到循环中修改为属性值的复制!
+				console.log(this.body[this.body.length - 1] === this.body[this.body.length - 2]);
+
+
+				//当小蛇的坐标更新后，需要重新绘制小蛇
+				this.init();
+
+			};
+
+
+
+
+			//检测正确性：
+			var s1 = new Snake({
+				map:document.getElementById("map")
+			});
+
+			s1.init();
+
+			s1.move();
+
+			s1.move();
+
+			s1.move();
+
+
+		})();
+
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;padding: 0;
+		}
+		#map{
+			width: 800px;
+			height: 600px;
+			background-color: #ccc;
+			position: relative;
+		}
+
+		#map div{
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="map"></div>
+
+	<script>
+		//由于要使用面向对象方式进行编程，所以需要先分析案例中需要哪些对象
+
+		//需要4个部分：
+		//1 地图：只需要书写一个盒子即可
+		//		设置宽高与背景色，由于内部的小蛇与食物会出现在地图中的任意位置，所以需要给地图设置相对定位。
+		//2 食物:
+		//      由于页面中可能出现n个食物，所以提前设置一个构造函数，在需要新食物时进行创建即可
+		//3 小蛇
+		//4 游戏控制对象(控制游戏什么时候结束)
+
+
+		//每个功能部分都是相互独立的，每个部分都可以设置一个自调用函数进行包裹
+
+		//食物对象的实现：
+		(function(){
+
+			function Food(options){
+				//属性
+				this.width = options.width || 20;
+				this.height = options.height || 20;
+				this.bgColor = options.bgColor || "green";
+
+				//设置盒子的位置属性:
+				//    位置设置时使用left和top，但是这个值不能随便设置，需要有固定的间隔
+				//    这个间隔就是一个盒子的宽度
+				//	  所以我们只需要设置一个随机的坐标值即可(范围为0-39之间的随机整数)
+				this.x = 0;
+				this.y = 0;
+
+				//为了功能扩展方便，可以将地图也设置为一个属性，表示这个食物的放置位置
+				this.map = options.map;
+
+			}
+
+			//设置方法：
+			//  init 表示初始化
+			Food.prototype.init = function(){
+				//原型的方法中的this就是实例对象
+
+
+				//*需要使用的功能：
+				//	- document.createElement()
+				//	- DOM对象.style.样式名
+				//  - Math.random()
+				//  - Math.floor()
+				//  - DOM对象.appendChild()
+
+				//1 创建一个盒子div
+				var div = document.createElement("div");
+
+				//2 设置样式
+				div.style.width = this.width + "px";
+				div.style.height = this.height + "px";
+				div.style.backgroundColor = this.bgColor;
+
+				//3 计算随机的left与top
+				// Math.random()  [0-1)
+				// 需要先计算出随机的坐标，坐标的范围为0-39以及之间的随机整数
+
+				// 随机值计算时的40不能书写成固定的值，需要根据地图和食物的尺寸进行计算
+				// 公式   范围最大值 = 地图尺寸 / 食物尺寸   再进行向下取整
+				var maxWidthCount = Math.floor(this.map.offsetWidth / this.width);
+				var maxHeightCount = Math.floor(this.map.offsetHeight / this.height);
+
+				this.x = Math.floor(Math.random() * maxWidthCount);
+				this.y = Math.floor(Math.random() * maxHeightCount);
+
+				// 根据随机坐标设置left与top即可
+				div.style.left = this.x * this.width + "px";
+				div.style.top = this.y * this.height + "px";
+
+				//4 放入到地图中
+				this.map.appendChild(div);
+
+			}
+
+
+			var currentMap = document.getElementById("map");
+			var f1 = new Food({
+				bgColor:"red",
+				map:currentMap
+			});
+
+
+			//使用下面的init方法即可创建一个新的随机位置的食物
+			f1.init();
+			f1.init();
+			f1.init();
+
+			//小思考：每次调用init后虽然会出现一个新的食物，但是旧的食物依然存在，如何删除？
+		})();
+
+
+	</script>
+
+</body>
+</html>
