@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<style type="text/css">
+  body {
+    background: #ccc;
+  }
+  
+  label {
+    width: 40px;
+    display: inline-block;
+  }
+  
+  span {
+    color: red;
+  }
+  
+  .container {
+    margin: 100px auto;
+    width: 400px;
+    padding: 50px;
+    line-height: 40px;
+    border: 1px solid #999;
+    background: #efefef;
+  }
+  
+  span {
+    margin-left: 30px;
+    font-size: 12px;
+  }
+  
+  .wrong {
+    color: red
+  }
+  
+  .right {
+    color: green;
+  }
+  
+  .defau {
+    width: 200px;
+    height: 20px;
+  }
+  
+  .de1 {
+    background-position: 0 -20px;
+  }
+</style>
+<body>
+<div class="container">
+  <label for="ipt">座机</label><input type="text" id="ipt"><span></span><br/>
+</div>
+<script>
+  //座机号的格式:区号-电话号
+
+  //010-66161616
+  //0317-6616161
+
+  //区号3-4位数字  电话号7-8位数字
+  //细节：区号的首位为0
+  //    /0\d{2,3}-\d{7,8}/;
+  
+  //1 获取元素
+  var ipt = document.getElementById("ipt");
+  var sp = ipt.nextSibling;
+  var reg = /^0\d{2,3}-\d{7,8}$/;
+
+  //2 设置事件
+  //获取焦点事件  onfocus   失去焦点事件  onblur
+  ipt.onblur = function(){
+    //3 设置内容验证
+    if(reg.test(this.value)){
+      //4 设置提示内容
+      sp.innerText = "正确";
+    }else{
+      sp.innerText = "错误";
+    }
+  };
+
+  
+
+
+
+
+</script>
+</body>
+</html>

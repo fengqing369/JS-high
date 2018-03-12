@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	
+	<script>
+		//正则对字符串可以进行三种操作
+		//匹配test()   替换replace()    提取  字符串.match()   正则.exec()
+
+
+		//1 替换操作
+		//var str = "abAchatjabfAtjthabfAtABhft";
+		//参数1，要替换的子字符串   参数2，要替换成什么字符串
+		//返回值为结果字符串
+		//var result = str.replace("a", "z");
+		//console.log(str, result);
+
+		//缺点，只能替换从左往右的第一个满足的子字符串
+
+
+		//replace方法的参数1可以为正则表达式
+		//正则表达式的匹配模式设置：
+		//  g - 全局匹配模式 - 匹配到所有满足条件的子字符串
+		//  i - 忽略大小写
+		/*var result = str.replace(/ab/ig, "--");
+		console.log(result);*/
+
+
+		//2 提取操作：
+
+		// 2.1 字符串.match()
+		//var str = '小明：么么哒，找了好久了，我的邮箱是xiaoming@qq.com小红：我老公特别喜欢这个电影，爱你哦，邮箱是xiaohong@10086.com李雷：好人一生平安，邮箱时lilei@yahoo.cn我：谢谢wuyou@qq.com';
+
+		//传入参数正则表达式，返回值为提取到的内容
+		//如果不设置匹配模式g，只有第一个提取的结果，添加g后，可以提取所有匹配结果
+		//console.log(str.match(/\w+@\w+\.\w+/g));
+
+
+		// 2.2 正则.exec()
+		var str = '小明：么么哒，找了好久了，我的邮箱是xiaoming@qq.com小红：我老公特别喜欢这个电影，爱你哦，邮箱是xiaohong@10086.com李雷：好人一生平安，邮箱时lilei@yahoo.cn我：谢谢wuyou@qq.com';
+
+		//使用时的注意点：
+		//  必须使用同一个正则对象去检测一个字符串
+		//  每次得到的都是新结果
+
+		//  如果匹配到最后一个内容后再次调用，返回null
+		//  如果得到null后再次调用，会重新匹配一轮(没有必要)
+		var reg = /(\w+)@\w+(?:\.\w+)+/g;
+		/*console.log(reg.exec(str));
+		console.log(reg.exec(str));
+		console.log(reg.exec(str));
+		console.log(reg.exec(str));
+		console.log(reg.exec(str));*/
+
+		//  我们发现代码需要重复执行，但是重复次数不确定，使用while循环
+		/*
+			//常见错误写法：由于exec的每次执行均获取新结果，如果在条件中直接调用，会导致结果跳项
+			while(reg.exec(str)){
+				console.log(reg.exec(str));
+			}
+		*/
+		//正确方式：
+		/*var result;
+		//在条件中调用exec，同时使用变量对结果进行保存，在循环体使用变量即可
+		while(result = reg.exec(str)){
+				console.log(result);
+		}*/
+
+		//()的功能
+		// 1 表示整体
+		// 2 进行提取
+		//    括号内的部分会单独提取出来
+		//    如果不希望进行提取，在(后面书写?:
+
+
+
+		//3 字符串.trim() ie9以下不支持
+		var str = "        dhu    wagduaa    ";
+		// console.log(str.trim());
+
+	/*	console.log(str.replace(/^\s+/, ""));
+		console.log(str.replace(/\s+$/, ""));*/
+
+		//console.log(str.replace(/^\s+|\s+$/g, ""));
+
+		function myTrim(str){
+			return str.replace(/^\s+|\s+$/g, "");
+		}
+
+		console.log(myTrim(str));
+
+	</script>
+
+</body>
+</html>

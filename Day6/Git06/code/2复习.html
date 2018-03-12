@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+			
+			/*var str = "100";
+
+			console.log(typeof 100);
+
+			var num = 100;
+			num += 10;
+			// num = num + 10;
+
+
+			var a, b, c = 10, d = 100;
+
+			(1 + 1) * 2
+
+			!fun();
+
+			!obj.name
+
+			obj["name"]
+
+
+			var str = '<div id="box"></div>';
+*/
+
+	//10进制  逢十进一
+	//2 逢二进一
+	//16进制 逢十六进一： 0123456789 abcdef
+
+	/*var num = 10;
+
+	// 当前位数值 * 进制底数的位数次方
+	//  2 * 1 + 1 * 8 = 10;
+	console.log(num.toString(8));*/
+
+
+	/*console.log(isNaN("abc"));
+	console.log(Number.isNaN("abc"));*/
+
+	//parseInt参数2表示当前数据是多少进制的，转换为10进制
+	/*var str = "12";
+	console.log(parseInt(str,8));
+*/	
+	
+	var arr = [1,2,"a",4,5,2,"a",4,5,"a",4,5,2,"a",4,5,"a"];
+
+	/*//当前已经找到的第一个a的索引值
+	var index = arr.indexOf("a");
+
+	var indexArr = [];
+	indexArr.push(index);
+
+	index = arr.indexOf("a",index + 1);
+	indexArr.push(index);
+
+	index = arr.indexOf("a",index + 1);
+	indexArr.push(index);
+
+	index = arr.indexOf("a",index + 1);
+	indexArr.push(index);*/
+
+	//如果indexOf找不到元素，返回-1，结束执行
+	//代码重复，次数不定，使用while循环即可
+
+
+	//练习：找到数组arr中所有a的索引值
+
+
+	/*//化简上述代码：
+	var indexArr = [];
+
+	//注意初始值的含义，为了让indexOf第一次取值的起始索引值为0
+	var index = -1;
+	//var index = arr.indexOf("a", 0);
+	//indexArr.push(index);
+
+	//确保还存在a的情况下，进行索引值的记录
+	while(arr.indexOf("a",index + 1) !== -1){
+		index = arr.indexOf("a",index + 1);
+		indexArr.push(index);
+	}
+
+	console.log(indexArr);*/
+
+/*	var arr = [1, 2, 3, 4];
+	console.log(arr.toString());
+	console.log(arr.join("-"));
+*/
+
+
+/*	var obj = {
+		name:"jack",
+		age:18
+	};
+
+	for(var k in obj){
+		//k - 属性名 - 字符串类型
+		//obj[k] - 属性值 - obj.k
+		console.log(obj[k]);
+	}
+*/
+
+	/*function Animal(){
+
+	}
+	Animal.prototype.toWc = function(){
+		//由于此方法会被人和猫咪继承，给两种对象设置不同功能
+		//猫咪上厕所需要4步：刨坑 上 埋 命令人类铲屎
+		//人类上厕所需要3步：脱裤子 上 提裤子
+		// if(arguments.length === 4){
+			console.log("动物上厕所");
+		// }else if (arguments.length === 3){
+		// 	console.log("人上厕所");
+		// }
+	};
+
+	function Cat(){
+
+	}
+	Cat.prototype = new Animal();
+
+	function People(){
+
+	}
+	People.prototype = new Animal();
+	People.prototype.toWc = function(){
+		console.log("人上厕所");
+	};
+
+	var c1 = new Cat();
+	c1.toWc("刨坑", "上", "埋", "命令人类铲屎");
+
+
+	var p1 = new People();
+	p1.toWc("脱裤子", "上", "提裤子");
+*/
+
+/*
+	function fun(){
+
+	}
+*/
+	/*var fun = function(n,m){
+
+	};
+
+	fun(1,2);
+*/
+
+/*var arr = [1, 2, 3];
+var num1 = 100;
+function fun(num2,arr3){
+	num2++;
+	arr3[0] = 100;
+	console.log(num2,arr3);//101
+
+}
+fun(num1,arr);
+console.log(num1,arr);//100
+*/
+
+
+/*(function(window,document,undefined){
+})(window,document);
+*/
+
+//如何将日期转换为毫秒形式
+//当前日期到1970-1-1之间的时间转换为毫秒形式 - 时间戳
+/*var date = new Date();
+console.log(date.getTime());
+console.log(+new Date());
+console.log(Date.now());
+console.log(Date.parse("2015-1-1"));
+console.log(date.valueOf());
+*/
+
+
+	
+	/*var str = "abcdefg";
+	// console.log(str.charAt(2));
+	// console.log(str[2]);
+
+	str[1] = "z";
+	console.log(str);*/
+
+
+	//结合split与join对字符串进行替换或删除操作
+	/*var str = "abacdeafag";
+	console.log(str.split("a").join(""));
+	console.log(str.split("a").join("z"));*/
+
+
+	//结合split与reverse与join，翻转字符串
+	/*var str = "abcdefghijk";
+	console.log(str.split("").reverse().join(""));
+*/
+
+	/*var obj = {
+		name:"jack",
+		age:18,
+		"gender":"man"
+	};
+
+	//将json形式的对象转换为json字符串的形式
+	console.log(JSON.stringify(obj));*/
+
+
+	/*var str = '{"name":"jack","age":18,"gender":"man"}';
+	console.log(JSON.parse(str));*/
+
+
+
+	</script>
+
+	<ul id="list" data-index="1">
+		<li>我是li</li>
+	</ul>
+	
+	<div id="box"></div>
+
+
+
+
+	<script>
+
+	/*	var list = document.getElementById("list");
+		var text = list.firstChild;
+
+		console.dir(list);
+		console.log(text);
+
+
+		document.createElement();*/
+		/*var text1 = document.createTextNode("text1");
+		console.dir(text1);*/
+/*
+		var list = document.getElementById("list");
+		console.dir(list.getAttributeNode("id"));
+		console.log(list.getAttribute("id"));*/
+
+
+		var box = document.getElementById("box");
+		//给box中创建1000个空div
+
+		//使用innerHTML拼接的方式
+		/*console.time("innerHTML");
+
+		//1086.108154296875ms
+		for(var i = 0; i < 1000; i++){
+			box.innerHTML += "<div></div>";
+		}
+		console.timeEnd("innerHTML");*/
+
+
+		/*//document.createElement的方式
+		console.time("document.createElement");
+		//5.999999999ms
+		var div;
+		//1086.108154296875ms
+		for(var i = 0; i < 1000; i++){
+			div = document.createElement("div");
+			box.appendChild(div);
+		}
+		console.timeEnd("document.createElement");*/
+
+
+		//innerHTML在循环中重复使用时消耗很多性能
+		//避免在循环中使用即可
+		//  使用字符串或数组在循环中替代innerHTML执行即可
+		console.time("innerHTML");
+		var str,arr;
+		//5.108154296875ms
+		for(var i = 0; i < 1000; i++){
+			 //str += "<div></div>";
+
+			 arr.push("<div></div>");
+		}
+		box.innerHTML = arr.join("");
+		console.timeEnd("innerHTML");
+
+
+
+	</script>
+
+
+</body>
+</html>

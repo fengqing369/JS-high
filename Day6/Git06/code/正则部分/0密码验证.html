@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<style type="text/css">
+  body {
+    background: #ccc;
+  }
+  
+  label {
+    width: 40px;
+    display: inline-block;
+  }
+  
+  span {
+    color: red;
+  }
+  
+  .container {
+    margin: 100px auto;
+    width: 400px;
+    padding: 50px;
+    line-height: 40px;
+    border: 1px solid #999;
+    background: #efefef;
+  }
+  
+  span {
+    margin-left: 30px;
+    font-size: 12px;
+  }
+  
+  .wrong {
+    color: red
+  }
+  
+  .right {
+    color: green;
+  }
+  
+  .strengthLv0 {
+    height: 6px;
+    width: 120px;
+    border: 1px solid #ccc;
+    padding: 2px;
+  }
+  
+  .strengthLv1 {
+    background: red;
+    height: 6px;
+    width: 40px;
+    border: 1px solid #ccc;
+    padding: 2px;
+  }
+  
+  .strengthLv2 {
+    background: orange;
+    height: 6px;
+    width: 80px;
+    border: 1px solid #ccc;
+    padding: 2px;
+  }
+  
+  .strengthLv3 {
+    background: green;
+    height: 6px;
+    width: 120px;
+    border: 1px solid #ccc;
+    padding: 2px;
+  }
+</style>
+<body>
+<div class="container">
+  <label>密码</label>
+  <input type="text" id="ipt" maxlength="16">
+  <div class="pass-wrap">
+    <em>密码强度：</em>
+    <!-- 用于显示强度文字 -->
+    <em id="strength"></em>
+    <!-- 用于显示强度等级:使用类名控制 -->
+    <div id="strengthLevel" class="strengthLv0"></div>
+  </div>
+</div>
+<script>
+  //强度的设置：
+  // 如果含有数字或小写字符或大写字符中的一个为弱
+  // 含有两个为中，含有三个为强
+
+  // 如果密码低于6位，不显示强度信息
+
+
+  //1 获取元素
+  var ipt = document.getElementById("ipt");//输入框
+  var strength = document.getElementById("strength");//强度文字框
+  var strengthLevel = document.getElementById("strengthLevel");//强度等级框
+
+  var arr = ["","弱","中","强"];
+  //2 使用oninput事件
+  ipt.oninput = function(){
+     //5 检测密码长度
+    if(this.value.length < 6){
+      //不是合法长度，将所有的内容还原为默认值
+      strengthLevel.className = "strengthLv0";
+      strength.innerText = "";
+      return;
+    }
+    //3 检测当前输入框内容种类的个数
+    var count = 0;
+    //3.1 内容检测
+    //使用时发现，当字符类中的字符过多时书写比较麻烦
+    //可以使用范围类的写法进行简化  /[0123456789]/ 改为 /[0-9]/
+    if(/[0-9]/.test(this.value)){
+      count++;
+    }
+    if(/[a-z]/.test(this.value)){
+      count++; 
+    }
+    if(/[A-Z]/.test(this.value)){
+      count++;
+    }
+    //4 设置强度信息
+    // 类名设置：
+    strengthLevel.className = "strengthLv" + count;
+
+    // 强度文字设置：
+    // 文字的内容有4种
+    //  0     1     2      3
+    // ""   "弱"  "中"   "强"
+    strength.innerText = arr[count];
+
+   /* //5 检测密码长度
+    if(this.value.length < 6){
+      //不是合法长度，将所有的内容还原为默认值
+      strengthLevel.className = "strengthLv0";
+      strength.innerText = "";
+    }
+*/
+
+  }
+
+
+</script>
+</body>
+</html>

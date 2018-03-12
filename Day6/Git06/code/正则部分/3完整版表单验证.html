@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<style type="text/css">
+  body {
+    background: #ccc;
+  }
+  
+  label {
+    width: 40px;
+    display: inline-block;
+  }
+  
+  span {
+    color: red;
+  }
+  
+  .container {
+    margin: 100px auto;
+    width: 400px;
+    padding: 50px;
+    line-height: 40px;
+    border: 1px solid #999;
+    background: #efefef;
+  }
+  
+  span {
+    margin-left: 30px;
+    font-size: 12px;
+  }
+  
+  .wrong {
+    color: red
+  }
+  
+  .right {
+    color: green;
+  }
+  
+  .defau {
+    width: 200px;
+    height: 20px;
+  }
+  
+  .de1 {
+    background-position: 0 -20px;
+  }
+</style>
+<body>
+<div class="container">
+  <label>Q Q</label><input type="text" id="inp1"><span></span><br/>
+  <label>手机</label><input type="text" id="inp2"><span></span><br/>
+  <label>邮箱</label><input type="text" id="inp3"><span></span><br/>
+  <label>座机</label><input type="text" id="inp4"><span></span><br/>
+  <label>姓名</label><input type="text" id="inp5"><span></span><br/>
+</div>
+<script>
+
+
+    //  wuyouAAA_123@qq.com
+    //  邮箱的匹配规则根据实际场景不同有n种，我们书写的是大体的结构
+    //  具体限制的个数等内容根据实际场景设置即可
+
+
+    //网站拷贝的一个正则表达式，可以看懂即可
+    //   /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+
+
+
+
+    yanZheng("inp3",/^\w+@\w+\.\w+$/);
+    yanZheng("inp4", /^0\d{2,3}-\d{7,8}$/);
+    yanZheng("inp5", /^[\u4e00-\u9fa5]{2,4}$/);
+
+
+    function yanZheng(idName, reg){
+          //1 获取元素
+      var ipt = document.getElementById(idName);
+      var sp = ipt.nextSibling;
+
+      //2 设置事件
+      //获取焦点事件  onfocus   失去焦点事件  onblur
+      ipt.onblur = function(){
+        //3 设置内容验证
+        if(reg.test(this.value)){
+          //4 设置提示内容
+          sp.innerText = "正确";
+        }else{
+          sp.innerText = "错误";
+        }
+  };
+    }
+</script>
+</body>
+</html>
